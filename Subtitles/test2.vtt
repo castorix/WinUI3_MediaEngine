@@ -1,0 +1,52 @@
+WEBVTT
+
+REGION
+id:region1
+width:80%
+lines:3
+regionanchor:50%,100% 
+viewportanchor:50%,90%
+scroll:up
+
+<style>
+  video::cue {
+    background-image: linear-gradient(to bottom, dimgray, lightgray);
+    color: blue;
+  }
+
+  video::cue(.bg-yellow) {
+    background-color: yellow; 
+  }
+
+  video::cue(.green) { 
+    color: green; 
+  }
+
+</style>
+
+1
+00:00:00.498 --> 00:00:02.827 position:45%,line-right align:center size:35%
+- Johnny, where are you?
+
+2
+00:00:02.827 --> 00:00:06.383 region:region1
+- <i>Over here</i>
+- Where?
+
+3
+00:00:06.383 --> 00:00:09.427
+Oh, <b>there</b> you are!
+
+4
+00:00:09.427 --> 00:00:12.600 
+Come over here. 
+I want to read to you.
+
+5
+00:00:12.600 --> 00:00:16.900 
+I have your favorite book:
+<u>Green Eggs and Ham</u>
+
+6
+00:00:16.900 --> 00:00:20.100 region:region1
+This caption with <c.green>green</c> and <c.red.bg-yellow>red</c> is styled using CSS

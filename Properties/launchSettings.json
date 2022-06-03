@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinUI3_MediaEngine_DXGI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinUI3_MediaEngine_DXGI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

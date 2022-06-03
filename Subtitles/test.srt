@@ -1,0 +1,25 @@
+Test SRT
+
+cue#1
+00:00:00,490 --> 00:00:08,800
+<u> First Line </u>
+Subtitle 1 : Line with <b>bold</b> text
+Subtitle 1 : Line <i>italic</i> text
+{\an9}Top-right: an9 Line
+
+2
+00:00:08,800 --> 00:00:010,550
+Subtitle 2 : First <b><i>bold & italic unique Line</i></b>
+
+3
+00:00:10,550 --> 00:00:15,421
+<font face="Times New Roman" color="#ffff80" size="30">Subtitle 3 : First Line with font and color</font>
+
+Subtitle 3 : Second Line
+Subtitle 3 : Third Line
+
+4
+00:00:15,421 --> 00:00:20,001
+Subtitle 4 : First Line
+Subtitle 4 : Second Line
+Subtitle 4 : Third Line
