@@ -41,7 +41,7 @@ namespace WinUI3_MediaEngine
         }
 
         public CImageButton()
-             : this(false, true)
+             : this(false, false)
         {
         }
 

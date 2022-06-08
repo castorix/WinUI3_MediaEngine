@@ -689,6 +689,171 @@ namespace WinUI3_MediaEngine
         [DllImport("Kernel32.dll", SetLastError = true, EntryPoint = "RtlMoveMemory")]
         public static extern void CopyMemory(IntPtr Destination, IntPtr Source, int Length);
 
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool bRedraw);
+
+        [DllImport("Gdi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
+
+        [DllImport("Gdi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr CreateRectRgn(int x1, int y1, int x2, int y2);
+
+        [DllImport("Gdi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int CombineRgn(IntPtr hrgnDest, IntPtr hrgnSrc1, IntPtr hrgnSrc2, int iMode);
+
+        [DllImport("Gdi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int SelectClipRgn(IntPtr hdc, IntPtr hrgn);
+
+        public const int RGN_AND = 1;
+        public const int RGN_OR = 2;
+        public const int RGN_XOR = 3;
+        public const int RGN_DIFF = 4;
+        public const int RGN_COPY = 5;
+        public const int RGN_MIN = RGN_AND;
+        public const int RGN_MAX = RGN_COPY;
+
+        public const int ERROR = 0;
+        public const int NULLREGION = 1;
+        public const int SIMPLEREGION = 2;
+        public const int COMPLEXREGION = 3;
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        public const int SWP_NOSIZE = 0x0001;
+        public const int SWP_NOMOVE = 0x0002;
+        public const int SWP_NOZORDER = 0x0004;
+        public const int SWP_NOREDRAW = 0x0008;
+        public const int SWP_NOACTIVATE = 0x0010;
+        public const int SWP_FRAMECHANGED = 0x0020;  /* The frame changed: send WM_NCCALCSIZE */
+        public const int SWP_SHOWWINDOW = 0x0040;
+        public const int SWP_HIDEWINDOW = 0x0080;
+        public const int SWP_NOCOPYBITS = 0x0100;
+        public const int SWP_NOOWNERZORDER = 0x0200;  /* Don't do owner Z ordering */
+        public const int SWP_NOSENDCHANGING = 0x0400;  /* Don't send WM_WINDOWPOSCHANGING */
+        public const int SWP_DRAWFRAME = SWP_FRAMECHANGED;
+        public const int SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+        public const int SWP_DEFERERASE = 0x2000;
+        public const int SWP_ASYNCWINDOWPOS = 0x4000;
+
+        [DllImport("User32.dll", SetLastError = true)]
+        public static extern IntPtr CreateWindowEx(int dwExStyle, string lpClassName, string lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
+
+        public const int WS_OVERLAPPED = 0x00000000,
+            WS_POPUP = unchecked((int)0x80000000),
+            WS_CHILD = 0x40000000,
+            WS_MINIMIZE = 0x20000000,
+            WS_VISIBLE = 0x10000000,
+            WS_DISABLED = 0x08000000,
+            WS_CLIPSIBLINGS = 0x04000000,
+            WS_CLIPCHILDREN = 0x02000000,
+            WS_MAXIMIZE = 0x01000000,
+            WS_CAPTION = 0x00C00000,
+            WS_BORDER = 0x00800000,
+            WS_DLGFRAME = 0x00400000,
+            WS_VSCROLL = 0x00200000,
+            WS_HSCROLL = 0x00100000,
+            WS_SYSMENU = 0x00080000,
+            WS_THICKFRAME = 0x00040000,
+            WS_TABSTOP = 0x00010000,
+            WS_MINIMIZEBOX = 0x00020000,
+            WS_MAXIMIZEBOX = 0x00010000,
+            WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
+                             WS_CAPTION |
+                             WS_SYSMENU |
+                             WS_THICKFRAME |
+                             WS_MINIMIZEBOX |
+                             WS_MAXIMIZEBOX;
+
+        public const int WS_EX_DLGMODALFRAME = 0x00000001;
+        public const int WS_EX_NOPARENTNOTIFY = 0x00000004;
+        public const int WS_EX_TOPMOST = 0x00000008;
+        public const int WS_EX_ACCEPTFILES = 0x00000010;
+        public const int WS_EX_TRANSPARENT = 0x00000020;
+        public const int WS_EX_MDICHILD = 0x00000040;
+        public const int WS_EX_TOOLWINDOW = 0x00000080;
+        public const int WS_EX_WINDOWEDGE = 0x00000100;
+        public const int WS_EX_CLIENTEDGE = 0x00000200;
+        public const int WS_EX_CONTEXTHELP = 0x00000400;
+        public const int WS_EX_RIGHT = 0x00001000;
+        public const int WS_EX_LEFT = 0x00000000;
+        public const int WS_EX_RTLREADING = 0x00002000;
+        public const int WS_EX_LTRREADING = 0x00000000;
+        public const int WS_EX_LEFTSCROLLBAR = 0x00004000;
+        public const int WS_EX_RIGHTSCROLLBAR = 0x00000000;
+        public const int WS_EX_CONTROLPARENT = 0x00010000;
+        public const int WS_EX_STATICEDGE = 0x00020000;
+        public const int WS_EX_APPWINDOW = 0x00040000;
+        public const int WS_EX_OVERLAPPEDWINDOW = (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE);
+        public const int WS_EX_PALETTEWINDOW = (WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
+        public const int WS_EX_LAYERED = 0x00080000;
+        public const int WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritence of mirroring by children
+        public const int WS_EX_NOREDIRECTIONBITMAP = 0x00200000;
+        public const int WS_EX_LAYOUTRTL = 0x00400000; // Right to left mirroring
+        public const int WS_EX_COMPOSITED = 0x02000000;
+        public const int WS_EX_NOACTIVATE = 0x08000000;
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool ShowWindow(IntPtr hWnd, int nShowCmd);
+
+        public const int SW_HIDE = 0;
+        public const int SW_SHOWNORMAL = 1;
+        public const int SW_SHOWMINIMIZED = 2;
+        public const int SW_SHOWMAXIMIZED = 3;
+        public const int SW_SHOWNOACTIVATE = 4;
+        public const int SW_SHOW = 5;
+
+        public const uint LWA_COLORKEY = 0x00000001;
+        public const uint LWA_ALPHA = 0x00000002;
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
+
+        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndParent);
+
+        const int GWL_STYLE = (-16);
+        const int GWL_EXSTYLE = (-20);
+        public static IntPtr SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong)
+        {
+            if (IntPtr.Size == 4)
+            {
+                return SetWindowLongPtr32(hWnd, nIndex, dwNewLong);
+            }
+            return SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
+        }
+
+        [DllImport("User32.dll", CharSet = CharSet.Auto, EntryPoint = "SetWindowLong")]
+        public static extern IntPtr SetWindowLongPtr32(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("User32.dll", CharSet = CharSet.Auto, EntryPoint = "SetWindowLongPtr")]
+        public static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        // public static IntPtr GetWindowLong(HandleRef hWnd, int nIndex)
+        public static long GetWindowLong(IntPtr hWnd, int nIndex)
+        {
+            if (IntPtr.Size == 4)
+            {
+                return GetWindowLong32(hWnd, nIndex);
+            }
+            return GetWindowLongPtr64(hWnd, nIndex);
+        }
+
+        [DllImport("User32.dll", EntryPoint = "GetWindowLong", CharSet = CharSet.Auto)]
+        public static extern long GetWindowLong32(IntPtr hWnd, int nIndex);
+
+        [DllImport("User32.dll", EntryPoint = "GetWindowLongPtr", CharSet = CharSet.Auto)]
+        public static extern long GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+
 
 
 
@@ -702,6 +867,8 @@ namespace WinUI3_MediaEngine
         private FrameworkElement m_VideoContainer = null;
         private Slider m_SliderTime = null;
         private TextBlock m_TextBlockElapsedTime = null;
+
+        public IntPtr m_hWndContainer = IntPtr.Zero;
 
         private IDXGISwapChain1 m_pDXGISwapChain1 = null;
 
@@ -842,6 +1009,8 @@ namespace WinUI3_MediaEngine
             {
                 m_hWnd = hWnd;
                 m_VideoContainer = container;
+                m_hWndContainer = CreateWindowEx(WS_EX_TRANSPARENT | WS_EX_LAYERED, "Static", "", WS_VISIBLE | WS_CHILD, 0, 0, (int)m_VideoContainer.ActualWidth, (int)m_VideoContainer.ActualHeight, m_hWnd, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+
                 m_BorderColor.rgbAlpha = borderColor.A;
                 m_BorderColor.rgbRed = borderColor.R;
                 m_BorderColor.rgbGreen = borderColor.G;
@@ -1013,7 +1182,7 @@ namespace WinUI3_MediaEngine
                         Orientation = Orientation.Horizontal
                     };
 
-                    buttonPlayPause = new CImageButton()
+                    buttonPlayPause = new CImageButton(false, false)
                     {
                         Width = 40,
                         Height = 40,
@@ -1031,11 +1200,11 @@ namespace WinUI3_MediaEngine
                     //};
                     //buttonRewind.SetFunctionLongPress(Rewind);
 
-                    buttonStop = new CImageButton()
+                    buttonStop = new CImageButton(false, false)
                     {
                         Width = 40,
                         Height = 40,
-                        HorizontalAlignment = HorizontalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Right,
                         Source = new BitmapImage(new Uri("ms-appx:///Assets/Button_Stop_Blue.png"))
                     };
 
@@ -1047,7 +1216,7 @@ namespace WinUI3_MediaEngine
                     //    Source = new BitmapImage(new Uri("ms-appx:///Assets/Button_Forward_Blue2.png"))
                     //};
 
-                    buttonRepeat = new CImageButton()
+                    buttonRepeat = new CImageButton(false, false)
                     {
                         Width = 40,
                         Height = 40,
@@ -1055,7 +1224,7 @@ namespace WinUI3_MediaEngine
                     };
                     buttonRepeat.SetSource("ms-appx:///Assets/Button_Repeat_Blue.png", buttonRepeat.Width, buttonRepeat.Height);
 
-                    buttonFullscreen = new CImageButton()
+                    buttonFullscreen = new CImageButton(false, false)
                     {
                         Width = 40,
                         Height = 40,
@@ -1063,7 +1232,7 @@ namespace WinUI3_MediaEngine
                         Source = new BitmapImage(new Uri("ms-appx:///Assets/Button_Fullscreen_Blue.png"))
                     };
 
-                    buttonSound = new CImageButton()
+                    buttonSound = new CImageButton(false, false)
                     {
                         Width = 40,
                         Height = 40,
@@ -1093,9 +1262,11 @@ namespace WinUI3_MediaEngine
                     sp1.Children.Add(buttonRepeat);
                     sp1.Children.Add(buttonFullscreen);
                     sp1.Children.Add(buttonSound);
+
                     sp1.Children.Add(sliderSound);
 
                     buttonPlayPause.CImageButtonClicked += buttonPlayPause_CImageButtonClicked;
+
                     //buttonRewind.CImageButtonClicked += buttonRewind_CImageButtonClicked;
                     //buttonForward.CImageButtonClicked += buttonForward_CImageButtonClicked;
                     buttonStop.CImageButtonClicked += buttonStop_CImageButtonClicked;
@@ -1136,6 +1307,11 @@ namespace WinUI3_MediaEngine
                         double nHeight = ((Slider)sender).ActualHeight;
                         m_nControlsHeight += nHeight;
                         m_nControlsHeightOld = m_nControlsHeight;
+
+                        // To resize the height with m_nControlsHeight
+                        RECT rectWindow = new RECT();
+                        GetWindowRect(m_hWnd, out rectWindow);
+                        SetWindowPos(m_hWnd, IntPtr.Zero, 0, 0, rectWindow.right - rectWindow.left, rectWindow.bottom - rectWindow.top + 1, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
                     };
 
                     //sp1.Measure(new Windows.Foundation.Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1144,6 +1320,8 @@ namespace WinUI3_MediaEngine
 
                     m_VideoContainer.SizeChanged += M_VideoContainer_SizeChanged;
                     Microsoft.UI.Xaml.Media.CompositionTarget.Rendering += CompositionTarget_Rendering;
+
+                    //hWndChild = FindWindowEx(hWnd, IntPtr.Zero, "Microsoft.UI.Content.ContentWindowSiteBridge", null);                                     
 
                     m_bInitialized = true;
                 }
@@ -1463,7 +1641,44 @@ namespace WinUI3_MediaEngine
 
         private void M_VideoContainer_SizeChanged(object sender, Microsoft.UI.Xaml.SizeChangedEventArgs e)
         {
+            if (m_hWndContainer != IntPtr.Zero)
+            {
+                if (IsFullScreen())
+                {
+                    MoveWindow(m_hWndContainer, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), true);
+                }
+                else
+                {
+                    uint nDPI = GetDpiForWindow(m_hWnd);
+                    int nWidth = (int)(e.NewSize.Width * nDPI / 96.0f);
+                    int nHeight = (int)(e.NewSize.Height * nDPI / 96.0f);
+                    nHeight -= (int)m_nControlsHeight;
+                    MoveWindow(m_hWndContainer, (int)m_VideoContainer.ActualOffset.X, (int)m_VideoContainer.ActualOffset.Y, nWidth, nHeight, true);
+                }
+            }
             Resize(e.NewSize);
+          
+
+            //var offset = m_VideoContainer.ActualOffset;
+            //var sz = m_VideoContainer.ActualSize;
+            //sz.Y -= (float)m_nControlsHeight;
+
+            //uint nDPI = GetDpiForWindow(m_hWnd);
+            ////sz.Y -= (float)(m_nControlsHeight * (nDPI / 96.0f));
+            //offset.X *= (nDPI / 96.0f);
+            //offset.Y *= (nDPI / 96.0f);
+            //sz.X *= (nDPI / 96.0f);
+            //sz.Y *= (nDPI / 96.0f);
+
+            //RECT rectTarget = new RECT((int)offset.X, (int)offset.Y, (int)offset.X + (int)sz.X, (int)offset.Y + (int)sz.Y);
+            //if (IsFullScreen())
+            //{
+            //    rectTarget.left = 0;
+            //    rectTarget.top = 0;
+            //    rectTarget.right = GetSystemMetrics(SM_CXSCREEN);
+            //    rectTarget.bottom = GetSystemMetrics(SM_CYSCREEN);
+            //}
+            //SetRegion(hWndChild, true, ref rectTarget);
         }
 
         // for x:Bind
@@ -1536,20 +1751,22 @@ namespace WinUI3_MediaEngine
                     ////}
 
                     // In case of Alt + Tab
-                    if (m_bFullScreen)
-                    {
-                        Microsoft.UI.WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(m_hWnd);
-                        Microsoft.UI.Windowing.AppWindow apw = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(myWndId);
-                        Microsoft.UI.Windowing.OverlappedPresenter presenter = apw.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;
-                        presenter.SetBorderAndTitleBar(m_bFullScreen, m_bFullScreen);
-                        presenter.IsResizable = m_bFullScreen;
-                        m_bFullScreen = false;
-                        if (m_hHook != 0)
-                        {
-                            UnhookWindowsHookEx(m_hHook);
-                            m_hHook = 0;
-                        }
-                    }
+                    //if (m_bFullScreen)
+                    //{
+                    //    //Microsoft.UI.WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(m_hWnd);
+                    //    //Microsoft.UI.Windowing.AppWindow apw = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(myWndId);
+                    //    //Microsoft.UI.Windowing.OverlappedPresenter presenter = apw.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;
+                    //    //presenter.SetBorderAndTitleBar(m_bFullScreen, m_bFullScreen);
+                    //    //presenter.IsResizable = m_bFullScreen;
+                    //    //presenter.IsMinimizable = m_bFullScreen;
+                    //    //presenter.IsMaximizable = m_bFullScreen;
+                    //    //m_bFullScreen = false;
+                    //    //if (m_hHook != 0)
+                    //    //{
+                    //    //    UnhookWindowsHookEx(m_hHook);
+                    //    //    m_hHook = 0;
+                    //    //}
+                    //}
                 }
             }
             return hr;
@@ -1557,20 +1774,22 @@ namespace WinUI3_MediaEngine
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
-            HRESULT hr = HRESULT.S_OK;
+            //HRESULT hr = HRESULT.S_OK;
             Render();
             if ((GetKeyState(VK_ESCAPE) & 0x8000) == 0x8000)
             {
                 //Console.Beep(5000, 10);
-                bool bFulllScreen = false;
-                IDXGIOutput pDXGIOutput = null;
-                hr = m_pDXGISwapChain1.GetFullscreenState(out bFulllScreen, out pDXGIOutput);
-                if (hr == HRESULT.S_OK)
-                {
-                    if (bFulllScreen)
-                        SetFullScreen(false);
-                    SafeRelease(ref pDXGIOutput);
-                }
+                //bool bFulllScreen = false;
+                //IDXGIOutput pDXGIOutput = null;
+                //hr = m_pDXGISwapChain1.GetFullscreenState(out bFulllScreen, out pDXGIOutput);
+                //if (hr == HRESULT.S_OK)
+                //{
+                //    if (bFulllScreen)
+                //        SetFullScreen(false);
+                //    SafeRelease(ref pDXGIOutput);
+                //}
+                if (m_bFullScreen)
+                    SetFullScreen(false);
             }
         }
 
@@ -2874,8 +3093,9 @@ namespace WinUI3_MediaEngine
                 //swapChainDesc.Flags = 0;
                 swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG.DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE;
                 //swapChainDesc.AlphaMode = DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_PREMULTIPLIED;
-
-                hr = pDXGIFactory2.CreateSwapChainForHwnd(m_pD3D11DevicePtr, hWnd, ref swapChainDesc, IntPtr.Zero, null, out m_pDXGISwapChain1);
+                 
+                //hr = pDXGIFactory2.CreateSwapChainForHwnd(m_pD3D11DevicePtr, hWnd, ref swapChainDesc, IntPtr.Zero, null, out m_pDXGISwapChain1);
+                hr = pDXGIFactory2.CreateSwapChainForHwnd(m_pD3D11DevicePtr, m_hWndContainer, ref swapChainDesc, IntPtr.Zero, null, out m_pDXGISwapChain1);
                 // hr = 0x887a0001
                 if (hr == HRESULT.S_OK)
                 {
@@ -2993,6 +3213,10 @@ namespace WinUI3_MediaEngine
             }
             var sz = m_VideoContainer.ActualSize;
             Windows.Foundation.Size szVideoContainer = new Windows.Foundation.Size(sz.X, sz.Y);
+            RECT rectWindow = new RECT();
+            GetWindowRect(m_hWnd, out rectWindow);
+            SetWindowPos(m_hWnd, IntPtr.Zero, 0, 0, rectWindow.right - rectWindow.left, rectWindow.bottom - rectWindow.top + 1, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
             Resize(szVideoContainer);
         }
 
@@ -3035,17 +3259,85 @@ namespace WinUI3_MediaEngine
                 }
             }
             return hr;
-        }
+        }       
 
         public HRESULT SetFullScreen(bool bFulllScreen)
         {
             HRESULT hr = HRESULT.S_OK;
+
+            // https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/stable-channel#version-11-stable
+            Microsoft.UI.Windowing.OverlappedPresenter defaultPresenter;
             Microsoft.UI.WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(m_hWnd);
             Microsoft.UI.Windowing.AppWindow apw = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(myWndId);
-            Microsoft.UI.Windowing.OverlappedPresenter presenter = apw.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;                         
+            if (bFulllScreen)
+            {
+                // Capture the default presenter.
+                defaultPresenter = apw.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;
+
+                // Opt in the default overlapped presenter so it can control various aspects of the AppWindow.
+                defaultPresenter.IsAlwaysOnTop = defaultPresenter.IsAlwaysOnTop;
+                defaultPresenter.IsResizable = defaultPresenter.IsResizable;
+                defaultPresenter.IsMinimizable = defaultPresenter.IsMinimizable;
+                defaultPresenter.IsMaximizable = defaultPresenter.IsMaximizable;
+                defaultPresenter.SetBorderAndTitleBar(defaultPresenter.HasBorder, defaultPresenter.HasTitleBar);
+
+                apw.SetPresenter(Microsoft.UI.Windowing.AppWindowPresenterKind.FullScreen);
+            }
+            else
+            {
+                apw.SetPresenter(Microsoft.UI.Windowing.AppWindowPresenterKind.Default);
+            }
+
+            //SetParent(m_hWndContainer, IntPtr.Zero);
+            //long nStyle = GetWindowLong(m_hWndContainer, GWL_STYLE);
+            //if ((nStyle & WS_CHILD) != 0)
+            //{
+            //    SetWindowLong(m_hWndContainer, GWL_STYLE, (IntPtr)(nStyle & ~WS_CHILD));
+            //}
+            //hr = m_pDXGISwapChain1.SetFullscreenState(bFulllScreen, null);
+
+            //SetWindowPos(m_hWnd, IntPtr.Zero,
+            //         0, 0,
+            //         GetSystemMetrics(SM_CXSCREEN),
+            //         GetSystemMetrics(SM_CYSCREEN),
+            //         SWP_NOOWNERZORDER | SWP_FRAMECHANGED);         
+           
+            m_bFullScreen = bFulllScreen;
+            if (bFulllScreen)
+            {    
+                if (m_hHook == 0)
+                {
+                    MouseProcedure = new HookProc(MouseProc);
+                    //hHook = SetWindowsHookEx(WH_MOUSE, MouseProcedure, (IntPtr)0, (int)GetCurrentThreadId());
+                    m_hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProcedure, (IntPtr)0, 0);
+                }
+            }
+            else
+            {
+                if (m_hHook != 0)
+                {
+                    UnhookWindowsHookEx(m_hHook);
+                    m_hHook = 0;
+                }
+            }
+            return hr;
+        }
+        public HRESULT SetFullScreenOld(bool bFulllScreen)
+        {
+            long nStyle = GetWindowLong(m_hWnd, GWL_STYLE);
+
+            HRESULT hr = HRESULT.S_OK;
+            Microsoft.UI.WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(m_hWnd);
+            Microsoft.UI.Windowing.AppWindow apw = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(myWndId);
+            Microsoft.UI.Windowing.OverlappedPresenter presenter = apw.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;
             presenter.SetBorderAndTitleBar(!bFulllScreen, !bFulllScreen);
-            presenter.IsResizable = !bFulllScreen;           
-            hr = m_pDXGISwapChain1.SetFullscreenState(bFulllScreen, null);
+            presenter.IsResizable = !bFulllScreen;
+            presenter.IsMinimizable = !bFulllScreen;
+            presenter.IsMaximizable = !bFulllScreen;
+            //  DXGI_ERROR_INVALID_CALL  if child window
+            // Fullscreen is not allowed for swapchains targetting a child window.
+            // Applications are advised to create a second swapchain targeting a non - child window. [MISCELLANEOUS ERROR #82: ]           
+            //hr = m_pDXGISwapChain1.SetFullscreenState(bFulllScreen, null);
             m_bFullScreen = bFulllScreen;
             if (bFulllScreen)
             {
@@ -3069,15 +3361,43 @@ namespace WinUI3_MediaEngine
 
         public bool IsFullScreen()
         {
-            HRESULT hr = HRESULT.S_OK;
-            bool bFulllScreen = false;
-            IDXGIOutput pDXGIOutput = null;
-            hr = m_pDXGISwapChain1.GetFullscreenState(out bFulllScreen, out pDXGIOutput);
-            if (hr == HRESULT.S_OK)
-            {
-                SafeRelease(ref pDXGIOutput);
-            }
-            return bFulllScreen;
+            return m_bFullScreen;
+
+            //HRESULT hr = HRESULT.S_OK;
+            //bool bFulllScreen = false;
+            //IDXGIOutput pDXGIOutput = null;
+            //hr = m_pDXGISwapChain1.GetFullscreenState(out bFulllScreen, out pDXGIOutput);
+            //if (hr == HRESULT.S_OK)
+            //{
+            //    SafeRelease(ref pDXGIOutput);
+            //}
+            //return bFulllScreen;
+        }
+
+        //public ImageSource Source
+        //{
+        //    get { return (ImageSource)GetValue(SourceProperty); }
+        //    set { SetValue(SourceProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty SourceProperty =
+        //    DependencyProperty.Register("Source", typeof(ImageSource), typeof(CMediaEngine), null);
+
+        public void Hide()
+        {
+            //CopyImage();
+            ShowWindow(m_hWndContainer, SW_HIDE);
+        }
+
+        public void Show()
+        {
+            //Source = null;
+            ShowWindow(m_hWndContainer, SW_SHOWNORMAL);
+        }
+
+        public void SetOpacity(int nOpacity)  
+        {
+            SetLayeredWindowAttributes(m_hWndContainer, 0, (byte)(255 * nOpacity / 100), LWA_ALPHA);
         }
 
         public bool IsPlaying()
@@ -3093,8 +3413,10 @@ namespace WinUI3_MediaEngine
 
         public void EnableHorizontalMirrorMode(bool bMirror)
         {
+           HRESULT hr = m_pTimedText.SelectTrack(0, true);
+             hr = m_pTimedText.SelectTrack(1, true);
             // For testing styles in cues
-            // GetCueList();
+            GetCueList();
 
             // Always false ?
             //if (m_pMediaEngineEx.IsStereo3D())
@@ -3330,6 +3652,25 @@ namespace WinUI3_MediaEngine
             return nCode < 0 ? CallNextHookEx(m_hHook, nCode, wParam, lParam) : 0;
         }
 
+       // For 1.1.0 release which added a (stupid) black/white rectangle covering everything
+        private void SetRegion(IntPtr hWnd, bool bRegion, ref RECT rect)
+        {
+            if (bRegion)
+            {
+                RECT rc;
+                GetClientRect(m_hWnd, out rc);
+                int nScreenWidth = GetSystemMetrics(SM_CXSCREEN);
+                int nScreenHeight = GetSystemMetrics(SM_CYSCREEN);
+                IntPtr WindowRgn = CreateRectRgn(0, 0, nScreenWidth, nScreenHeight);
+                IntPtr HoleRgn = CreateRectRgn(rect.left, rect.top, rect.right, rect.bottom);
+                CombineRgn(WindowRgn, WindowRgn, HoleRgn, RGN_DIFF);
+                SetWindowRgn(hWnd, WindowRgn, true);
+                DeleteObject(HoleRgn);
+            }
+            else
+                SetWindowRgn(hWnd, IntPtr.Zero, true);
+        }
+
         private static void SafeRelease<T>(ref T comObject) where T : class
         {
             T t = comObject;
@@ -3535,6 +3876,7 @@ namespace WinUI3_MediaEngine
             return;
         }
     }
+
 
     // Not used, seems useless...
     public class CMediaEngineSrcElements : IMFMediaEngineSrcElements, IDisposable

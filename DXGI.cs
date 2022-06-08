@@ -564,6 +564,7 @@ namespace DXGI
         [PreserveSig]
         new HRESULT Present(uint SyncInterval, uint Flags);
         new HRESULT GetBuffer(uint Buffer, ref Guid riid, out IntPtr ppSurface);
+        [PreserveSig]
         new HRESULT SetFullscreenState(bool Fullscreen, IDXGIOutput pTarget);
         new HRESULT GetFullscreenState(out bool pFullscreen, out IDXGIOutput ppTarget);
         new HRESULT GetDesc(out DXGI_SWAP_CHAIN_DESC pDesc);

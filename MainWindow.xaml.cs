@@ -87,6 +87,10 @@ namespace WinUI3_MediaEngine
             mediaEngine = new CMediaEngine();
            // hr = mediaEngine.Initialize(hWnd, CMediaEngine.ME_MODE.MODE_AUDIO, ctrlVideo, Microsoft.UI.Colors.Black);            
             hr = mediaEngine.Initialize(hWnd, CMediaEngine.ME_MODE.MODE_FRAME_SERVER, ctrlVideo, Microsoft.UI.Colors.Black);
+
+            //FrameworkElement fe = (FrameworkElement)this.Content;
+            //fe.RequestedTheme = ElementTheme.Default;
+            //Microsoft.UI.Xaml.Application.Current.RequestedTheme = ApplicationTheme.Light;
         }
 
         private void _apw_Closing(Microsoft.UI.Windowing.AppWindow sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs args)
@@ -107,16 +111,17 @@ namespace WinUI3_MediaEngine
         private async void btnLoadURL_Click(object sender, RoutedEventArgs e)
         {
             if (!bOpen)
-            {
-                bOpen = true;
-                await LoadURLListAsync();
-                OpenURL();
-                bOpen = false;
+            {               
+                await LoadURLListAsync();               
+                OpenURL();              
             }
         }
 
         private async void OpenURL()
         {
+            bOpen = true;
+            mediaEngine.SetOpacity(10);
+
             StackPanel sp = new StackPanel();
             AutoSuggestBox asb = new AutoSuggestBox()
             {
@@ -144,6 +149,8 @@ namespace WinUI3_MediaEngine
             };
             cd.XamlRoot = this.Content.XamlRoot;
             var cdResult = await cd.ShowAsync();
+            mediaEngine.SetOpacity(100);
+            bOpen = false;
             if (cdResult == ContentDialogResult.Primary)
             {
                 if (!listURLs.Contains(asb.Text))
@@ -682,8 +689,8 @@ namespace WinUI3_MediaEngine
             {               
                 var wb = mediaEngine.GetCaptureWriteableBitmapImage();
                 if (wb != null)
-                {
-                    SaveFrameDialog(wb);
+                {                   
+                    SaveFrameDialog(wb);                   
                 }
                 else
                 {
@@ -696,6 +703,7 @@ namespace WinUI3_MediaEngine
 
         private async void SaveFrameDialog(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap wb)
         {
+            mediaEngine.SetOpacity(10);
             StackPanel sp = new StackPanel();
             Image img = new Image();
             img.Source = wb;
@@ -717,6 +725,7 @@ namespace WinUI3_MediaEngine
 
             cd.XamlRoot = this.Content.XamlRoot;
             var cdResult = await cd.ShowAsync();
+            mediaEngine.SetOpacity(100);
             if (cdResult == ContentDialogResult.Primary)
             {
                 
